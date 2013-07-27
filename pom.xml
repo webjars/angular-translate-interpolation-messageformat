@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
+    <packaging>jar</packaging>
+    <groupId>org.webjars</groupId>
+    <artifactId>angular-translate-interpolation-messageformat</artifactId>
+    <version>0.1.2-SNAPSHOT</version>
+    <name>angular-translate-interpolation-messageformat</name>
+    <description>WebJar for angular-translate-interpolation-messageformat</description>
+    <url>http://webjars.org</url>
+
+    <developers>
+        <developer>
+            <id>jamesward</id>
+            <name>James Ward</name>
+            <email>james@jamesward.com</email>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE, Version 2</name>
+            <url>https://github.com/PascalPrecht/angular-translate-interpolation-messageformat/blob/master/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>http://github.com/webjars/angular-translate-interpolation-messageformat</url>
+        <connection>scm:git:https://github.com/webjars/angular-translate-interpolation-messageformat.git</connection>
+        <developerConnection>scm:git:https://github.com/webjars/angular-translate-interpolation-messageformat.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+    
+    <dependencies>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>angular-translate</artifactId>
+            <version>0.9.1-1</version>
+        </dependency>
+    </dependencies>
+    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <upstream.version>0.1.2</upstream.version>
+        <upstream.url>https://raw.github.com/PascalPrecht/angular-translate-interpolation-messageformat/${upstream.version}/src</upstream.url>
+        <destDir>${project.build.outputDirectory}/META-INF/resources/webjars/${project.artifactId}/${upstream.version}</destDir>
+    </properties>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>wagon-maven-plugin</artifactId>
+                <version>1.0-beta-4</version>
+                <executions>
+                    <execution>
+                        <id>download-full-js</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>download-single</goal>
+                        </goals>
+                        <configuration>
+                            <url>${upstream.url}</url>
+                            <fromFile>translateMessageFormatInterpolation.js</fromFile>
+                            <toFile>${destDir}/${project.artifactId}.js</toFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.3.2</version>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+                <targetPath>${destDir}</targetPath>
+            </resource>
+        </resources>
+    </build>
+
+</project>
